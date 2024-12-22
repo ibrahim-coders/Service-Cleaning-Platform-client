@@ -1,15 +1,18 @@
 import { useContext, useState } from 'react';
 import { BsEyeSlash } from 'react-icons/bs';
 import { LiaEyeSolid } from 'react-icons/lia';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthProvider } from '../Context/AuthContext';
+import { updateProfile } from 'firebase/auth';
+import { auth } from '../Firebase/firebase.console';
+import toast from 'react-hot-toast';
 
 const Register = () => {
   const { createNewUser, singwithGoogle } = useContext(AuthProvider);
   // const location = useLocation();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const from = location.state || '/';
 
   const [error, setError] = useState('');
@@ -26,10 +29,13 @@ const Register = () => {
     const email = form.email.value;
     const password = form.password.value;
     const photoURL = form.photoURL.value;
-    console.log(name, email, password, photoURL);
+    // console.log(name, email, password, photoURL);
 
     setError('');
-
+    if (!email) {
+      setError('Email is required!');
+      return;
+    }
     // Validation
     if (password.length < 6) {
       setError('Password must be at least 6 characters long.');
@@ -53,18 +59,39 @@ const Register = () => {
 
     createNewUser(email, password)
       .then(result => {
-        console.log(result.user);
-
-        //  navigate(from);
+        console.log('User created:', result.user);
+        toast.success('Registration successful!');
+        // Update user profile
+        return updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL,
+        });
+      })
+      .then(() => {
+        navigate('/');
       })
       .catch(error => {
-        console.log(error);
+        if (error.code === 'auth/email-already-in-use') {
+          setError(
+            'This email is already in use. Please use a different email.'
+          );
+        } else if (error.code === 'auth/weak-password') {
+          setError('Password must be at least 6 characters long.');
+        } else {
+          setError('An error occurred. Please try again.');
+        }
+        console.error('Error:', error.message);
       });
   };
 
   const handleGoogleSignIn = () => {
     singwithGoogle()
-      .then(result => console.log(result.user))
+      .then(result => {
+        console.log(result.user);
+        toast.success('Registration successful!');
+        navigate('/');
+      })
+
       .catch(error => console.log(error.message));
   };
   return (

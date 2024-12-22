@@ -5,15 +5,16 @@ import { BsEyeSlash } from 'react-icons/bs';
 import logings from '../assets/Animation - 1733925332827.json';
 import { useContext, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
-// import { useLocation, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+
 // import toast from 'react-hot-toast';
 
 const Login = () => {
   // const location = useLocation();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const from = location.state || '/';
   const { UserLogin, singwithGoogle } = useContext(AuthProvider);
   const [email, setEmail] = useState('');
@@ -32,7 +33,8 @@ const Login = () => {
       .then(result => {
         console.log('sign in', result.user);
 
-        // toast.success('Successfully created!');
+        toast.success('Successfully login!');
+        navigate('/');
         // navigate(from);
       })
       .catch(err => {
