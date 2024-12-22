@@ -1,15 +1,15 @@
-// import logo from '../assets/images/logo.png';
+import logo from '../../assets/house-cleaning-logo-2AKR9B1.jpg';
 
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   // const { user, logOut } = useContext(AuthContext);
   return (
-    <div className="navbar bg-base-100 shadow-sm container px-4 mx-auto">
+    <div className="navbar   shadow-md sticky top-0 z-50">
       <div className="flex-1">
         <Link to="/" className="flex gap-2 items-center">
-          {/* <img className="w-auto h-7" src={logo} alt="" /> */}
-          <span className="font-bold">SoloSphere</span>
+          <img className="w-10 h-10  rounded-full" src={logo} alt="" />
+          <span className="font-bold">Work_Cleaning </span>
         </Link>
       </div>
       <div className="flex-none">
