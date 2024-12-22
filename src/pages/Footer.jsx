@@ -14,7 +14,7 @@ const Footer = () => {
             src={logo}
             alt="Work_Cleaning Logo"
           />
-          <span className="font-bold text-lg">Work_Cleaning</span>
+          <span className="font-bold text-lg">Service_Cleaning</span>
         </Link>
         <p>
           We're your trusted a cleaning <br /> company, dedicated to any kind{' '}

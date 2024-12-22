@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AuthProvider } from '../Context/AuthContext';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 const AddServiceForm = () => {
   const { user } = useContext(AuthProvider);
 
@@ -10,8 +11,6 @@ const AddServiceForm = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     const form = e.target;
-
-    // Get form values
     const image = form.image.value;
     const title = form.title.value;
     const company = form.company.value;
@@ -42,15 +41,15 @@ const AddServiceForm = () => {
         `${import.meta.env.VITE_API_URL}/addservice`,
         serviceData
       );
-      alert('Service added successfully!');
-      form.reset(); // Clear the form
+      toast.success('Service added successfully!');
+      form.reset();
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg my-10">
       <h2 className="text-2xl font-bold text-center mb-6">Add New Service</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -123,6 +122,7 @@ const AddServiceForm = () => {
               <option value="" disabled>
                 Select category
               </option>
+              <option value="House Cleaning">House Cleaning</option>
               <option value="Kitchen Cleaning">Kitchen Cleaning</option>
               <option value="Office Cleaning">Office Cleaning</option>
               <option value="Roof Cleaning">Roof Cleaning</option>
