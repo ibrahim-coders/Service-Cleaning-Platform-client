@@ -9,8 +9,12 @@ import Slide from '../components/Slide';
 import bgimg1 from '../assets/1685518151043.png';
 import bgimg2 from '../assets/What_to_Look_For_in_a_Potential_Cleaning_Employee_1_0191b0e980.png';
 import bgimg3 from '../assets/depositphotos_43207253-stock-photo-large-diverse-group-of-janitors.jpg';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 const Banner = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div className="container px-6 py-10 mx-auto">
       {/* Swiper Section */}
@@ -82,7 +86,12 @@ const Banner = () => {
       </Swiper>
 
       {/* Content Section */}
-      <div className="mt-10 text-center w-full">
+      <div
+        className="mt-10 text-center w-full"
+        data-aos="fade-up"
+        data-aos-easing="ease-out-cubic"
+        data-aos-duration="2000"
+      >
         <h2 className="text-3xl font-bold text-gray-800">
           Professional House Cleaning Services
         </h2>
