@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -90,7 +90,7 @@ const Banner = () => {
         className="mt-10 text-center w-full"
         data-aos="fade-up"
         data-aos-easing="ease-out-cubic"
-        data-aos-duration="2000"
+        data-aos-duration="1000"
       >
         <h2 className="text-3xl font-bold text-gray-800">
           Professional House Cleaning Services

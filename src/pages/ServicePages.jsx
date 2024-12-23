@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ServicePages = () => {
   const [services, setServices] = useState([]);
@@ -11,7 +12,7 @@ const ServicePages = () => {
         );
         setServices(response.data);
       } catch (error) {
-        console.error('Error fetching services:', error);
+        console.error(error);
       }
     };
 
@@ -32,7 +33,9 @@ const ServicePages = () => {
             </p>
             <p>Price: ${service.price}</p>
             <div className="items-start">
-              <button className="btn btn-primary">See Details</button>
+              <Link to={`/details/${service._id}`} className="btn btn-primary">
+                See Details
+              </Link>
             </div>
           </div>
         </div>

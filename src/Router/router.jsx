@@ -5,6 +5,8 @@ import Login from '../pages/Login';
 import Home from '../pages/Home/Home';
 import AddServiceForm from '../pages/AddServiceForm';
 import ServicePages from '../pages/ServicePages';
+import ServiceDetails from '../pages/ServiceDetails';
+import ReviewsPage from '../pages/ReviewsPage';
 
 const router = createBrowserRouter([
   {
@@ -20,8 +22,18 @@ const router = createBrowserRouter([
         element: <ServicePages />,
       },
       {
+        path: '/details/:id',
+        element: <ServiceDetails />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/details/${params.id}`),
+      },
+      {
         path: '/addService',
         element: <AddServiceForm />,
+      },
+      {
+        path: '/review',
+        element: <ReviewsPage />,
       },
       {
         path: '/login',

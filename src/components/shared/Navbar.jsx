@@ -35,6 +35,9 @@ const Navbar = () => {
           <li>
             <Link to="/addService">Add Service</Link>
           </li>
+          <li>
+            <Link to="/review">My Review</Link>
+          </li>
         </ul>
         {user ? (
           <div className="dropdown dropdown-end z-10">

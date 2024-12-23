@@ -1,5 +1,7 @@
+import { Link } from 'react-router-dom';
+
 const ServicesCard = ({ service }) => {
-  const { image, title, description, price } = service || {};
+  const { _id, image, title, description, price } = service || {};
   return (
     <div>
       <div className="card w-full shadow-xl">
@@ -7,11 +9,13 @@ const ServicesCard = ({ service }) => {
           <img src={image} alt="Shoes" className=" w-full h-64" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{title}</h2>
+          <h2 className="card-title">{title.slice(0, 30)}</h2>
           <p className="text-gray-600">{description.slice(0, 70)}...</p>
           <p>Price: ${price}</p>
           <div className="items-start">
-            <button className="btn btn-primary">See Details</button>
+            <Link to={`/details/${_id}`} className="btn btn-primary">
+              See Details
+            </Link>
           </div>
         </div>
       </div>

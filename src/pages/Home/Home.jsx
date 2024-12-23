@@ -3,6 +3,7 @@ import Banner from '../Banner';
 import HomePage from './HomePage';
 import axios from 'axios';
 import ServicesCard from '../../components/ServicesCard';
+import ServiceCleaning from '../../components/ServiceCleaning';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -30,6 +31,7 @@ const Home = () => {
         ))}
       </div>
       <HomePage />
+      <ServiceCleaning />
     </section>
   );
 };
