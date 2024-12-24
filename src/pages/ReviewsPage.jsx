@@ -2,13 +2,19 @@ import { Rating } from '@material-tailwind/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
-
 import Swal from 'sweetalert2';
 
 const ReviewsPage = () => {
   const { user } = useAuth();
   const [review, setReviews] = useState([]);
-
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [updatedText, setUpdatedText] = useState('');
+  const [text, setpdatedText] = useState('');
+  const [updatedRating, setUpdatedRating] = useState(0);
+  const [reviewIdToUpdate, setReviewIdToUpdate] = useState(null);
+  const handleRatingChange = newRating => {
+    setUpdatedRating(newRating);
+  };
   useEffect(() => {
     if (user?.email) {
       fetchReviews();
@@ -23,7 +29,6 @@ const ReviewsPage = () => {
       const data = Array.isArray(response.data)
         ? response.data
         : [response.data];
-
       setReviews(data);
     } catch (error) {
       console.error(error);
@@ -35,7 +40,7 @@ const ReviewsPage = () => {
   const handleDelete = async id => {
     Swal.fire({
       title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      text: 'Your review will be deleted',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -64,6 +69,40 @@ const ReviewsPage = () => {
         }
       }
     });
+  };
+
+  // Update review
+  const handleUpdateClick = review => {
+    setUpdatedText(review.review);
+    setpdatedText(review.title);
+    setUpdatedRating(review.state.rating);
+    setReviewIdToUpdate(review._id);
+    setIsModalOpen(true);
+  };
+
+  const handleSaveUpdate = async () => {
+    try {
+      const response = await axios.patch(
+        `${import.meta.env.VITE_API_URL}/review/${reviewIdToUpdate}`,
+        {
+          review: updatedText,
+          rating: updatedRating,
+          title: text,
+        }
+      );
+
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Updated!',
+          text: 'Your review has been updated.',
+          icon: 'success',
+        });
+        setIsModalOpen(false);
+        fetchReviews();
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -103,7 +142,7 @@ const ReviewsPage = () => {
               </p>
               <div className="flex gap-4">
                 <button
-                  // onClick={() => handleUpdate(review)} // Update functionality
+                  onClick={() => handleUpdateClick(reviews)}
                   className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
                 >
                   Update
@@ -123,6 +162,56 @@ const ReviewsPage = () => {
           </p>
         )}
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg w-96">
+            <h3 className="text-xl font-semibold mb-4">Update Review</h3>
+            <div>
+              <label className="block">Title</label>
+              <input
+                type="text"
+                value={text}
+                onChange={e => setpdatedText(e.target.value)}
+                className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+                required
+              />
+            </div>
+            <div>
+              <label className="block">Review Text</label>
+              <textarea
+                className="w-full p-2 border border-gray-300 rounded mt-2"
+                value={updatedText}
+                onChange={e => setUpdatedText(e.target.value)}
+              />
+            </div>
+            <div className="my-2">
+              <label className="block font-medium text-gray-700">Rating</label>
+              <Rating
+                unratedColor="amber"
+                ratedColor="amber"
+                className="flex w-6 text-orange-500"
+                value={updatedRating}
+                onChange={handleRatingChange}
+              />
+            </div>
+            <div className="mt-6 flex justify-between">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="bg-gray-500 text-white py-2 px-4 rounded"
+              >
+                Close
+              </button>
+              <button
+                onClick={handleSaveUpdate}
+                className="bg-blue-500 text-white py-2 px-4 rounded"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

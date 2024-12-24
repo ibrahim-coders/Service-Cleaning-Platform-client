@@ -1,6 +1,6 @@
 import logo from '../../assets/house-cleaning-logo-2AKR9B1.jpg';
 
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
 import { useContext } from 'react';
 
@@ -27,17 +27,21 @@ const Navbar = () => {
       <div className="flex-none">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <Link to="/service">Service</Link>
+            <NavLink to="/service">Service</NavLink>
           </li>
-          <li>
-            <Link to="/addService">Add Service</Link>
-          </li>
-          <li>
-            <Link to="/review">My Review</Link>
-          </li>
+          {user?.email && (
+            <>
+              <li>
+                <NavLink to="/addService">Add Service</NavLink>
+              </li>
+              <li>
+                <NavLink to="/review">My Review</NavLink>
+              </li>
+            </>
+          )}
         </ul>
         {user ? (
           <div className="dropdown dropdown-end z-10">

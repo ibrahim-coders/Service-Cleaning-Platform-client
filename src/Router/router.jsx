@@ -7,6 +7,7 @@ import AddServiceForm from '../pages/AddServiceForm';
 import ServicePages from '../pages/ServicePages';
 import ServiceDetails from '../pages/ServiceDetails';
 import ReviewsPage from '../pages/ReviewsPage';
+import PrivatRoute from './PrivatRoute';
 
 const router = createBrowserRouter([
   {
@@ -23,17 +24,29 @@ const router = createBrowserRouter([
       },
       {
         path: '/details/:id',
-        element: <ServiceDetails />,
+        element: (
+          <PrivatRoute>
+            <ServiceDetails />
+          </PrivatRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/details/${params.id}`),
       },
       {
         path: '/addService',
-        element: <AddServiceForm />,
+        element: (
+          <PrivatRoute>
+            <AddServiceForm />
+          </PrivatRoute>
+        ),
       },
       {
         path: '/review',
-        element: <ReviewsPage />,
+        element: (
+          <PrivatRoute>
+            <ReviewsPage />
+          </PrivatRoute>
+        ),
       },
       {
         path: '/login',

@@ -12,8 +12,7 @@ const ServiceDetails = () => {
   });
   const details = useLoaderData();
   const { user } = useContext(AuthProvider);
-  const reviewRef = useRef(); // Create a reference for the review textarea
-
+  const reviewRef = useRef();
   const {
     category,
     company,
@@ -35,7 +34,7 @@ const ServiceDetails = () => {
 
   const handleReviewSubmit = async e => {
     e.preventDefault();
-    const review = reviewRef.current.value; // Access the value using the ref
+    const review = reviewRef.current.value;
 
     if (!state.rating || !review) {
       toast.error('Please provide both text and a rating!');
@@ -79,6 +78,7 @@ const ServiceDetails = () => {
       <p className="text-gray-600 mb-3">
         <strong>Company:</strong> {company}
       </p>
+
       <p className="text-gray-600 mb-3">
         <strong>Website:</strong>{' '}
         <a href={website} className="text-blue-500">
@@ -96,7 +96,18 @@ const ServiceDetails = () => {
       </p>
 
       <form onSubmit={handleReviewSubmit}>
-        <div className="my-10">
+        <div className="mb-10">
+          <div className="">
+            <label className="block font-medium text-gray-700">Rating</label>
+
+            <Rating
+              unratedColor="amber"
+              ratedColor="amber"
+              className="flex w-6 text-orange-500"
+              onChange={handleChange}
+              value={state.rating}
+            />
+          </div>
           <div>
             <label className="block font-medium text-gray-700">
               Add a Review
@@ -108,17 +119,6 @@ const ServiceDetails = () => {
               rows="4"
               required
             ></textarea>
-          </div>
-          <div className="my-2">
-            <label className="block font-medium text-gray-700">Rating</label>
-
-            <Rating
-              unratedColor="amber"
-              ratedColor="amber"
-              className="flex w-6 text-orange-500"
-              onChange={handleChange}
-              value={state.rating}
-            />
           </div>
 
           <button
