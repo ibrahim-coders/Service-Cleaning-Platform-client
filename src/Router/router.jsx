@@ -8,6 +8,7 @@ import ServicePages from '../pages/ServicePages';
 import ServiceDetails from '../pages/ServiceDetails';
 import ReviewsPage from '../pages/ReviewsPage';
 import PrivatRoute from './PrivatRoute';
+import MyService from '../pages/MyService';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,14 @@ const router = createBrowserRouter([
         element: (
           <PrivatRoute>
             <AddServiceForm />
+          </PrivatRoute>
+        ),
+      },
+      {
+        path: '/myservice',
+        element: (
+          <PrivatRoute>
+            <MyService />
           </PrivatRoute>
         ),
       },

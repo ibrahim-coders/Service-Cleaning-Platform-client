@@ -20,7 +20,7 @@ const ServicePages = () => {
   }, []);
   console.log(services);
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-6 gap-4 my-10">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-6 gap-4 my-10 max-w-screen-2xl ">
       {services.map(service => (
         <div key={service._id} className="card w-full shadow-xl">
           <figure>
