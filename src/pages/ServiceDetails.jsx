@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useContext, useState, useRef } from 'react';
 import { AuthProvider } from '../Context/AuthContext';
 import { Rating } from '@material-tailwind/react';
@@ -6,6 +6,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 
 const ServiceDetails = () => {
+  const navigate = useNavigate();
   const [state, setState] = useState({
     rating: 0,
   });
@@ -44,22 +45,25 @@ const ServiceDetails = () => {
     const reviewData = {
       serviceId: _id,
       postedDate: new Date().toISOString(),
+      title,
       state,
       review,
       person: {
         name: user?.displayName,
         photo: user?.photoURL,
+        email: user?.email,
       },
     };
-
+    console.log(user?.email);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/review`,
         reviewData
       );
       toast.success('Review added successfully!');
-      reviewRef.current.value = ''; // Reset the review field
-      setState({ rating: 0 }); // Reset the rating state
+      navigate('/review');
+      reviewRef.current.value = '';
+      setState({ rating: 0 });
     } catch (error) {
       console.error('Error:', error);
     }
@@ -98,7 +102,7 @@ const ServiceDetails = () => {
               Add a Review
             </label>
             <textarea
-              ref={reviewRef} // Attach the ref here
+              ref={reviewRef}
               placeholder="Enter service review"
               className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
               rows="4"
