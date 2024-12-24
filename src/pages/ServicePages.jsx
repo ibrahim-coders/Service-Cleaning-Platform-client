@@ -22,7 +22,7 @@ const ServicePages = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-6 gap-4 my-10">
       {services.map(service => (
-        <div className="card w-full shadow-xl">
+        <div key={service._id} className="card w-full shadow-xl">
           <figure>
             <img src={service.image} alt="Shoes" className=" w-full h-64" />
           </figure>
