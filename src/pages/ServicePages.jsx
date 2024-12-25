@@ -1,15 +1,14 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const ServicePages = () => {
+  const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/all-service`
-        );
+        const response = await axiosSecure.get('/all-service');
         setServices(response.data);
       } catch (error) {
         console.error(error);

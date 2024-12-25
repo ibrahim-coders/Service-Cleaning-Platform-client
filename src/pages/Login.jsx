@@ -5,17 +5,15 @@ import { BsEyeSlash } from 'react-icons/bs';
 import logings from '../assets/Animation - 1733925332827.json';
 import { useContext, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
 import toast from 'react-hot-toast';
 
-// import toast from 'react-hot-toast';
-
 const Login = () => {
-  // const location = useLocation();
+  const location = useLocation();
 
   const navigate = useNavigate();
-  // const from = location.state || '/';
+  const from = location.state || '/';
   const { UserLogin, singwithGoogle } = useContext(AuthProvider);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,8 +32,8 @@ const Login = () => {
         console.log('sign in', result.user);
 
         toast.success('Successfully login!');
-        navigate('/');
-        // navigate(from);
+        // navigate('/');
+        navigate(from);
       })
       .catch(err => {
         if (err.code === 'auth/user-not-found') {

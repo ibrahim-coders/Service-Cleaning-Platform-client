@@ -3,8 +3,10 @@ import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const MyService = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [myService, setMyService] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,10 +25,8 @@ const MyService = () => {
 
   const fetchMyService = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/myservice/${
-          user.email
-        }?filter=${filter}&search=${search}`
+      const response = await axiosSecure.get(
+        `/myservice/${user.email}?filter=${filter}&search=${search}`
       );
       if (response.data.length === 0) {
         setNoDataFound(true);
@@ -51,9 +51,7 @@ const MyService = () => {
     }).then(async result => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/service/${id}`
-          );
+          const response = await axiosSecure.delete(`/service/${id}`);
           if (response.status === 200) {
             setMyService(prevServices =>
               prevServices.filter(service => service._id !== id)
@@ -86,8 +84,8 @@ const MyService = () => {
     };
 
     try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_API_URL}/update-service/${selectedService._id}`,
+      const response = await axiosSecure.put(
+        `/update-service/${selectedService._id}`,
         updatedService
       );
 

@@ -2,7 +2,9 @@ import { useContext } from 'react';
 import { AuthProvider } from '../Context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 const AddServiceForm = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthProvider);
 
   // Get the current date
@@ -37,10 +39,7 @@ const AddServiceForm = () => {
 
     try {
       // Post data to server
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/addservice`,
-        serviceData
-      );
+      const response = await axiosSecure.post('/addservice', serviceData);
       toast.success('Service added successfully!');
       form.reset();
     } catch (error) {
@@ -140,25 +139,27 @@ const AddServiceForm = () => {
             />
           </div>
         </div>
-
-        {/* Automatically Set Fields */}
-        <div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {' '}
+          {/* Automatically Set Fields */}
+          <div>
+            <p className="text-gray-600">
+              <strong>Added Date:</strong>
+            </p>
+            <p>{currentDate}</p>
+          </div>
+          {/* User email */}
           <p className="text-gray-600">
-            <strong>Added Date:</strong> {currentDate}
+            <strong>User Email:</strong>
+            <input
+              type="email"
+              defaultValue={user?.email}
+              disabled={true}
+              className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+              required
+            />
           </p>
         </div>
-
-        {/* User email */}
-        <p className="text-gray-600">
-          <strong>User Email:</strong>
-          <input
-            type="email"
-            defaultValue={user?.email}
-            disabled={true}
-            className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
-            required
-          />
-        </p>
 
         {/* Description */}
         <div>

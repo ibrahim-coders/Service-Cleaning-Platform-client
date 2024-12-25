@@ -1,10 +1,12 @@
 import { Rating } from '@material-tailwind/react';
-import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const ReviewsPage = () => {
+  const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const [review, setReviews] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,9 +25,7 @@ const ReviewsPage = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}/review-show/${user.email}`
-      );
+      const response = await axiosSecure.get(`/review-show/${user.email}`);
       const data = Array.isArray(response.data)
         ? response.data
         : [response.data];
@@ -49,9 +49,7 @@ const ReviewsPage = () => {
     }).then(async result => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `${import.meta.env.VITE_API_URL}/review/${id}`
-          );
+          const response = await axiosSecure.delete(`/review/${id}`);
 
           if (response.status === 200) {
             setReviews(prevReviews =>
@@ -82,14 +80,11 @@ const ReviewsPage = () => {
 
   const handleSaveUpdate = async () => {
     try {
-      const response = await axios.patch(
-        `${import.meta.env.VITE_API_URL}/review/${reviewIdToUpdate}`,
-        {
-          review: updatedText,
-          rating: updatedRating,
-          title: text,
-        }
-      );
+      const response = await axiosSecure.patch(`/review/${reviewIdToUpdate}`, {
+        review: updatedText,
+        rating: updatedRating,
+        title: text,
+      });
 
       if (response.status === 200) {
         Swal.fire({

@@ -4,15 +4,15 @@ import HomePage from './HomePage';
 import axios from 'axios';
 import ServicesCard from '../../components/ServicesCard';
 import ServiceCleaning from '../../components/ServiceCleaning';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Home = () => {
+  const axiosSecure = useAxiosSecure();
   const [services, setServices] = useState([]);
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/service`
-        );
+        const response = await axiosSecure.get('/service');
         setServices(response.data);
       } catch (error) {
         console.error('Error fetching services:', error);

@@ -2,10 +2,12 @@ import { useLoaderData, useNavigate } from 'react-router-dom';
 import { useContext, useState, useRef } from 'react';
 import { AuthProvider } from '../Context/AuthContext';
 import { Rating } from '@material-tailwind/react';
-import axios from 'axios';
+
 import toast from 'react-hot-toast';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const ServiceDetails = () => {
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const [state, setState] = useState({
     rating: 0,
@@ -55,10 +57,7 @@ const ServiceDetails = () => {
     };
     console.log(user?.email);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/review`,
-        reviewData
-      );
+      const response = await axiosSecure.post('/review', reviewData);
       toast.success('Review added successfully!');
       navigate('/review');
       reviewRef.current.value = '';
