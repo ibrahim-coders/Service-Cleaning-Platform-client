@@ -119,9 +119,7 @@ const AddServiceForm = () => {
               className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
               required
             >
-              <option value="Select category" disabled>
-                Select category
-              </option>
+              <option value="">Select category</option>
               <option value="House Cleaning">House Cleaning</option>
               <option value="Kitchen Cleaning">Kitchen Cleaning</option>
               <option value="Office Cleaning">Office Cleaning</option>
