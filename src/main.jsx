@@ -5,12 +5,14 @@ import router from './Router/router';
 import { RouterProvider } from 'react-router-dom';
 import AuthContext from './Context/AuthContext';
 import { Toaster } from 'react-hot-toast';
-
+import { HelmetProvider } from 'react-helmet-async';
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthContext>
-      <RouterProvider router={router} />
-      <Toaster position="top-right" reverseOrder={false} />
-    </AuthContext>
+    <HelmetProvider>
+      <AuthContext>
+        <RouterProvider router={router} />
+        <Toaster position="top-right" reverseOrder={false} />
+      </AuthContext>
+    </HelmetProvider>
   </StrictMode>
 );

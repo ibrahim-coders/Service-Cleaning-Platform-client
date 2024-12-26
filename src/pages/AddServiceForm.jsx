@@ -3,7 +3,10 @@ import { AuthProvider } from '../Context/AuthContext';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 const AddServiceForm = () => {
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { user } = useContext(AuthProvider);
 
@@ -42,6 +45,7 @@ const AddServiceForm = () => {
       const response = await axiosSecure.post('/addservice', serviceData);
       toast.success('Service added successfully!');
       form.reset();
+      navigate('/service');
     } catch (error) {
       console.error('Error:', error);
     }
@@ -49,6 +53,9 @@ const AddServiceForm = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg my-10">
+      <Helmet>
+        <title>Service| Add Service</title>
+      </Helmet>
       <h2 className="text-2xl font-bold text-center mb-6">Add New Service</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

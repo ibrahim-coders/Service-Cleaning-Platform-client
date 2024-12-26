@@ -5,6 +5,7 @@ import { Rating } from '@material-tailwind/react';
 
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const ServiceDetails = () => {
   const axiosSecure = useAxiosSecure();
@@ -69,6 +70,9 @@ const ServiceDetails = () => {
 
   return (
     <div className="max-w-screen-sm mx-auto my-10 p-5">
+      <Helmet>
+        <title>Service| Details</title>
+      </Helmet>
       <img src={image} alt={title} className="mx-auto rounded-lg mb-5" />
       <h2 className=" text-2xl font-bold mb-5">{title}</h2>
       <p className="text-gray-600 mb-3">

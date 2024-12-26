@@ -4,6 +4,7 @@ import useAuth from '../hooks/useAuth';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
 
 const MyService = () => {
   const axiosSecure = useAxiosSecure();
@@ -110,6 +111,9 @@ const MyService = () => {
   // console.log(search, filter);
   return (
     <div className="gap-4 px-8 max-w-screen-2xl mx-auto">
+      <Helmet>
+        <title>Service| My Service</title>
+      </Helmet>
       <h1 className="text-2xl font-bold mb-4">My Services</h1>
       <div className="flex flex-col md:flex-row justify-center items-center gap-5">
         <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300">

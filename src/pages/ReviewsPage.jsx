@@ -1,25 +1,32 @@
 import { Rating } from '@material-tailwind/react';
-
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import { Helmet } from 'react-helmet-async';
+import CountUp from 'react-countup';
 
 const ReviewsPage = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
-  const [review, setReviews] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [updatedText, setUpdatedText] = useState('');
-  const [text, setpdatedText] = useState('');
+  const [text, setText] = useState('');
   const [updatedRating, setUpdatedRating] = useState(0);
   const [reviewIdToUpdate, setReviewIdToUpdate] = useState(null);
+  const [userCount, setUserCount] = useState(0);
+  const [reviewCount, setReviewCount] = useState(0);
+  const [serviceCount, setServiceCount] = useState(0);
+
   const handleRatingChange = newRating => {
     setUpdatedRating(newRating);
   };
+
   useEffect(() => {
     if (user?.email) {
       fetchReviews();
+      fetchCountData();
     }
   }, [user]);
 
@@ -36,6 +43,40 @@ const ReviewsPage = () => {
     }
   };
 
+  const fetchCountData = async () => {
+    try {
+      const reviewResponse = await axiosSecure.get('/review-count');
+
+      setReviewCount(reviewResponse.data.count);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    const fetchServiceCount = async () => {
+      try {
+        const response = await axiosSecure.get('/all-service');
+        setServiceCount(response.data.length);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchServiceCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchServiceCount = async () => {
+      try {
+        const response = await axiosSecure.get('/user-count');
+        setUserCount(response.data.length);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchServiceCount();
+  }, []);
   // Delete review
   const handleDelete = async id => {
     Swal.fire({
@@ -50,12 +91,10 @@ const ReviewsPage = () => {
       if (result.isConfirmed) {
         try {
           const response = await axiosSecure.delete(`/review/${id}`);
-
           if (response.status === 200) {
             setReviews(prevReviews =>
               prevReviews.filter(review => review._id !== id)
             );
-
             Swal.fire({
               title: 'Deleted!',
               text: 'Your review has been deleted.',
@@ -72,7 +111,7 @@ const ReviewsPage = () => {
   // Update review
   const handleUpdateClick = review => {
     setUpdatedText(review.review);
-    setpdatedText(review.title);
+    setText(review.title);
     setUpdatedRating(review.state.rating);
     setReviewIdToUpdate(review._id);
     setIsModalOpen(true);
@@ -85,7 +124,6 @@ const ReviewsPage = () => {
         rating: updatedRating,
         title: text,
       });
-
       if (response.status === 200) {
         Swal.fire({
           title: 'Updated!',
@@ -102,48 +140,66 @@ const ReviewsPage = () => {
 
   return (
     <div className="p-4 max-w-6xl mx-auto">
+      <Helmet>
+        <title>Service | My Review</title>
+      </Helmet>
       <h1 className="text-2xl font-bold text-center mb-6">User Reviews</h1>
+      <div className="my-8 text-center">
+        <h3 className="text-xl font-semibold">Platform Statistics</h3>
+        <div className="flex justify-center gap-8 mt-4">
+          <div className="bg-gray-100 p-4 rounded">
+            <h4 className="text-lg">Users</h4>
+            <CountUp start={0} end={userCount} duration={2} />
+          </div>
+          <div className="bg-gray-100 p-4 rounded">
+            <h4 className="text-lg">Reviews</h4>
+            <CountUp start={0} end={reviews.length} duration={2} />
+          </div>
+          <div className="bg-gray-100 p-4 rounded">
+            <h4 className="text-lg">Services</h4>
+            <CountUp start={0} end={serviceCount} duration={2} />
+          </div>
+        </div>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {review.length > 0 ? (
-          review.map(reviews => (
+        {reviews.length > 0 ? (
+          reviews.map(review => (
             <div
-              key={reviews._id}
+              key={review._id}
               className="p-4 border rounded shadow hover:shadow-lg transition"
             >
               <div className="flex items-center mb-4">
                 <img
-                  src={reviews.person.photo}
-                  alt={reviews.person.name}
+                  src={review.person.photo}
+                  alt={review.person.name}
                   className="w-12 h-12 rounded-full mr-4"
                 />
                 <div>
-                  <h2 className="font-semibold">{reviews.person.name}</h2>
+                  <h2 className="font-semibold">{review.person.name}</h2>
                   <p className="text-sm text-gray-500">
-                    {new Date(reviews.postedDate).toLocaleDateString()}
+                    {new Date(review.postedDate).toLocaleDateString()}
                   </p>
                 </div>
               </div>
               <div>
                 <Rating
-                  value={reviews.state.rating}
+                  value={review.state.rating}
                   unratedColor="amber"
                   ratedColor="amber"
                   className="flex w-6 text-orange-500"
                 />
-                <h2 className="text-sm font-bold pt-2">{reviews.title}</h2>
+                <h2 className="text-sm font-bold pt-2">{review.title}</h2>
               </div>
-              <p className="text-sm text-gray-700 pt-2 mb-4">
-                {reviews.review}
-              </p>
+              <p className="text-sm text-gray-700 pt-2 mb-4">{review.review}</p>
               <div className="flex gap-4">
                 <button
-                  onClick={() => handleUpdateClick(reviews)}
+                  onClick={() => handleUpdateClick(review)}
                   className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
                 >
                   Update
                 </button>
                 <button
-                  onClick={() => handleDelete(reviews._id)}
+                  onClick={() => handleDelete(review._id)}
                   className="mt-4 bg-red-500 text-white py-2 px-4 rounded"
                 >
                   Delete
@@ -153,7 +209,7 @@ const ReviewsPage = () => {
           ))
         ) : (
           <p className="text-center text-gray-500">
-            {review.length === 0 ? 'No reviews found.' : ''}
+            {reviews.length === 0 ? 'No reviews found.' : ''}
           </p>
         )}
       </div>
@@ -167,7 +223,7 @@ const ReviewsPage = () => {
               <input
                 type="text"
                 value={text}
-                onChange={e => setpdatedText(e.target.value)}
+                onChange={e => setText(e.target.value)}
                 className="mt-1 block w-full border border-gray-300 rounded-lg shadow-sm px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
                 required
               />

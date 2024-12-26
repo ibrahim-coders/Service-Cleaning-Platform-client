@@ -1,19 +1,20 @@
 import { useContext, useState } from 'react';
 import { BsEyeSlash } from 'react-icons/bs';
 import { LiaEyeSolid } from 'react-icons/lia';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthProvider } from '../Context/AuthContext';
 import { updateProfile } from 'firebase/auth';
 import { auth } from '../Firebase/firebase.console';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Register = () => {
   const { createNewUser, singwithGoogle } = useContext(AuthProvider);
-  // const location = useLocation();
+  const location = useLocation();
 
   const navigate = useNavigate();
-  // const from = location.state || '/';
+  const from = location.state || '/';
 
   const [error, setError] = useState('');
   const [showPasswords, setShowPasswords] = useState(false);
@@ -68,7 +69,7 @@ const Register = () => {
         });
       })
       .then(() => {
-        navigate('/');
+        navigate(from);
       })
       .catch(error => {
         if (error.code === 'auth/email-already-in-use') {
@@ -89,13 +90,16 @@ const Register = () => {
       .then(result => {
         console.log(result.user);
         toast.success('Registration successful!');
-        navigate('/');
+        navigate(from);
       })
 
       .catch(error => console.log(error.message));
   };
   return (
     <div>
+      <Helmet>
+        <title>Service| Register</title>
+      </Helmet>
       <div className="flex flex-col md:flex-row items-center justify-center min-h-screen max-w-4xl w-full mx-auto p-4 gap-4">
         {/* Lottie Animation */}
         <dotlottie-player

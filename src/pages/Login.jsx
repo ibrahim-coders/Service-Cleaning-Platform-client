@@ -8,6 +8,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
 import toast from 'react-hot-toast';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
   const location = useLocation();
@@ -47,11 +48,17 @@ const Login = () => {
   };
   const handleGoogleSignIn = () => {
     singwithGoogle()
-      .then(result => console.log(result.user))
+      .then(result => {
+        console.log(result.user);
+        navigate(from);
+      })
       .catch(error => console.log(error.message));
   };
   return (
     <div className="flex flex-col items-center md:flex-row md:justify-between justify-center min-h-screen max-w-4xl w-full mx-auto p-4 gap-4">
+      <Helmet>
+        <title>Service| Login</title>
+      </Helmet>
       {/* Lottie Animation */}
       <div className="w-full">
         <Lottie animationData={logings}></Lottie>
