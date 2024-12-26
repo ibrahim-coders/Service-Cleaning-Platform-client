@@ -23,7 +23,7 @@ const Home = () => {
 
     fetchServices();
   }, []);
-  console.log(services);
+
   return (
     <section className=" max-w-screen-2xl mx-auto">
       <Banner />

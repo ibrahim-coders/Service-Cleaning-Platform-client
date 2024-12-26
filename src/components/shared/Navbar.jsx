@@ -33,7 +33,7 @@ const Navbar = () => {
         >
           {/* Logo */}
           <div className="flex-1 mt-4">
-            <Link to="/" className="flex gap-2 items-center">
+            <Link to="/" className="flex  gap-2 items-center">
               <img
                 className="w-10 h-10 rounded-full"
                 src={logo}
@@ -41,7 +41,7 @@ const Navbar = () => {
               />
               <span className="font-bold text-2xl">
                 <span className="text-green-500 px-2">Service</span>
-                <span className="text-sky-600">Cleaning</span>
+                <span className="text-sky-600">Clean</span>
               </span>
             </Link>
           </div>

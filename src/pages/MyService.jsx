@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import { FaEdit, FaTrash } from 'react-icons/fa';

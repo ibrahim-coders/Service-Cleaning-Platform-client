@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
 import CountUp from 'react-countup';
+import axios from 'axios';
 
 const ReviewsPage = () => {
   const axiosSecure = useAxiosSecure();
@@ -16,7 +17,7 @@ const ReviewsPage = () => {
   const [updatedRating, setUpdatedRating] = useState(0);
   const [reviewIdToUpdate, setReviewIdToUpdate] = useState(null);
   const [userCount, setUserCount] = useState(0);
-  const [reviewCount, setReviewCount] = useState(0);
+  // const [reviewCount, setReviewCount] = useState(0);
   const [serviceCount, setServiceCount] = useState(0);
 
   const handleRatingChange = newRating => {
@@ -45,9 +46,11 @@ const ReviewsPage = () => {
 
   const fetchCountData = async () => {
     try {
-      const reviewResponse = await axiosSecure.get('/review-count');
+      const reviewResponse = await axios.get(
+        `${import.meta.env.VITE_API_URL}/review-count`
+      );
 
-      setReviewCount(reviewResponse.data.count);
+      setReviews(reviewResponse.data.count);
     } catch (error) {
       console.error(error);
     }

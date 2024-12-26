@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { AuthProvider } from '../Context/AuthContext';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import { Helmet } from 'react-helmet-async';
