@@ -16,6 +16,7 @@
     "axios": "^1.7.9",
     "firebase": "^11.1.0",
     "framer-motion": "^11.15.0",
+    "keen-slider": "^6.8.6",
     "lottie-react": "^2.4.0",
     "react": "^18.3.1",
     "react-countup": "^6.5.3",
@@ -26,8 +27,10 @@
     "react-icons": "^5.4.0",
     "react-rating": "^2.0.5",
     "react-router-dom": "^7.1.0",
+    "react-switch": "^7.1.0",
     "sweetalert2": "^11.15.3",
-    "swiper": "^11.1.15"
+    "swiper": "^11.1.15",
+    "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

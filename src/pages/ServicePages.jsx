@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
 import { Helmet } from 'react-helmet-async';
 import axios from 'axios';
+import { AuthProvider } from '../Context/AuthContext';
+import Loader from '../components/Loader';
 
 const ServicePages = () => {
+  const { loading } = useContext(AuthProvider);
   const [services, setServices] = useState([]);
   const [filter, setFilter] = useState('');
   const [search, setSearch] = useState('');
+  const [sortedServices, setSortedServices] = useState([]);
+  const [isAscending, setIsAscending] = useState(true);
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -16,6 +20,7 @@ const ServicePages = () => {
           `${import.meta.env.VITE_API_URL}/all-service?filter=${filter}`
         );
         setServices(response.data);
+        setSortedServices(response.data); // Initialize sorted services with fetched data
       } catch (error) {
         console.error(error);
       }
@@ -24,12 +29,25 @@ const ServicePages = () => {
     fetchServices();
   }, [filter]);
 
+  useEffect(() => {
+    const sorted = [...services].sort((a, b) =>
+      isAscending ? a.price - b.price : b.price - a.price
+    );
+    setSortedServices(sorted);
+  }, [services, isAscending]); // Trigger sorting when services or isAscending change
+
   const handleSearch = () => {
     const filteredServices = services.filter(service =>
       service.title.toLowerCase().includes(search.toLowerCase())
     );
-    setServices(filteredServices);
+    setSortedServices(filteredServices); // Update sorted services when filtered
   };
+
+  const toggleSort = () => {
+    setIsAscending(!isAscending); // Toggle the sort order
+  };
+
+  if (loading) return <Loader />;
 
   return (
     <>
@@ -67,13 +85,19 @@ const ServicePages = () => {
             <option value="Window Cleaning">Window Cleaning</option>
           </select>
         </div>
+        <button
+          onClick={toggleSort}
+          className="px-4 bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600  py-4 text-sm font-medium text-white transition-colors duration-300 transform focus:outline-none"
+        >
+          Sort by Price: {isAscending ? 'Ascending' : 'Descending'}
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-6 gap-4 my-10 max-w-screen-2xl">
         <Helmet>
           <title>Service</title>
         </Helmet>
-        {services.map(service => (
+        {sortedServices.map(service => (
           <div key={service._id} className="card w-full shadow-xl">
             <figure>
               <img src={service.image} alt="Service" className="w-full h-64" />

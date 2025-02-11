@@ -6,6 +6,7 @@ import ServicesCard from '../../components/ServicesCard';
 import ServiceCleaning from '../../components/ServiceCleaning';
 
 import axios from 'axios';
+import CustomersReviews from '../../components/CustomersReviews';
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -23,17 +24,18 @@ const Home = () => {
 
     fetchServices();
   }, []);
-
+  console.log(services);
   return (
     <section className=" max-w-screen-2xl mx-auto">
       <Banner />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto px-6 gap-4 mb-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-auto  gap-4 mb-10">
         {services.map(service => (
           <ServicesCard key={service._id} service={service}></ServicesCard>
         ))}
       </div>
       <HomePage />
       <ServiceCleaning />
+      <CustomersReviews />
     </section>
   );
 };

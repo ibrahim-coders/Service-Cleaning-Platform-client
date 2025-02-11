@@ -16,14 +16,14 @@ const Banner = () => {
     AOS.init();
   }, []);
   return (
-    <div className="container px-6 py-10 mx-auto">
+    <div className="container  pb-10 mx-auto">
       {/* Swiper Section */}
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
         loop={true}
         autoplay={{
-          delay: 5000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -55,7 +55,7 @@ const Banner = () => {
             image={bgimg2}
             text={
               <div className="max-w-screen-sm">
-                <h3 className="text-2xl md:text-5xl font-semibold text-white">
+                <h3 className="text-2xl md:text-5xl font-semibold text-[#050315]">
                   Cleaning with a personal touch
                 </h3>
                 <p className="mt-2 font-normal text-white text-base">

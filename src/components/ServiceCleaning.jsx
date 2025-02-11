@@ -19,7 +19,7 @@ const ServiceCleaning = () => {
   };
 
   return (
-    <section className="py-16 bg-gray-50 px-8">
+    <section className="py-4 bg-gray-50 px-8">
       <div className="container mx-auto text-center">
         <motion.h2
           className="text-4xl font-bold text-gray-800 mb-6"

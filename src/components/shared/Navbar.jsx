@@ -2,10 +2,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthProvider } from '../../Context/AuthContext';
 import { useContext, useState } from 'react';
 import logo from '../../assets/house-cleaning-logo-2AKR9B1.jpg';
-
+import Switch from 'react-switch';
 const Navbar = () => {
   const [isToggleOpen, setIsToggleOpen] = useState(false);
-  const { user, signOutUser } = useContext(AuthProvider);
+  const { user, signOutUser, theme, setTheme, toggleTheme } =
+    useContext(AuthProvider);
 
   const handleSignout = () => {
     signOutUser()
@@ -24,26 +25,26 @@ const Navbar = () => {
     : 'invisible opacity-0';
 
   return (
-    <header className="relative z-20 w-full border-b border-slate-200 bg-white/90 shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
-      <div className="relative mx-auto max-w-full px-6 lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
+    <header className="relative  z-20 w-full border-b border-slate-200 bg-white/90 shadow-lg shadow-slate-700/5 after:absolute after:left-0 after:top-full after:z-10 after:block after:h-px after:w-full after:bg-slate-200 lg:border-slate-200 lg:backdrop-blur-sm lg:after:hidden">
+      <div className="relative mx-auto max-w-full lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem]">
         <nav
           aria-label="main navigation"
           className="flex h-[5.5rem] items-stretch justify-between font-medium text-slate-700"
           role="navigation"
         >
           {/* Logo */}
-          <div className="flex-1 mt-4">
-            <Link to="/" className="flex  gap-2 items-center">
+          <div className="flex-1 mt-2 ">
+            <Link to="/" className="flex  gap-2 items-center ml-10">
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full "
                 src={logo}
                 alt="Service Cleaning Logo"
               />
-              <span className="font-bold text-2xl">
-                <span className="text-green-500 px-2">Service</span>
-                <span className="text-sky-600">Clean</span>
-              </span>
             </Link>
+            <span className=" text-2xl">
+              <span className="text-green-500 px-2">Service</span>
+              <span className="text-sky-600">Clean</span>
+            </span>
           </div>
 
           {/* Toggle Button */}
@@ -144,31 +145,44 @@ const Navbar = () => {
               </li>
             )}
           </ul>
+          <button className="mx-2">
+            <Switch onChange={toggleTheme} checked={theme === 'dark'} />
+          </button>
 
           {/* Auth Buttons */}
           <div className="ml-auto flex items-center px-6 lg:ml-0 lg:p-0">
-            {user && user?.email ? (
-              <div className="flex gap-4">
+            {user && (
+              <div className="dropdown dropdown-end z-50">
                 <div
-                  title={user?.displayName || 'User'}
-                  className="w-10 rounded-full"
+                  tabIndex={0}
+                  role="button"
+                  className="btn btn-ghost btn-circle avatar"
                 >
-                  <img
-                    referrerPolicy="no-referrer"
-                    alt="User Profile"
-                    src={user?.photoURL || '/default-avatar.png'}
-                    className="w-10 h-10 rounded-full"
-                    loading="lazy"
-                  />
+                  <div title={user?.displayName} className="w-10 rounded-full">
+                    <img
+                      referrerPolicy="no-referrer"
+                      alt="User Profile Photo"
+                      src={user?.photoURL}
+                      className=" border-green-600"
+                    />
+                  </div>
                 </div>
-                <button
-                  onClick={handleSignout}
-                  className="btn bg-warning text-black"
+                <ul
+                  tabIndex={0}
+                  className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  Logout
-                </button>
+                  <li className="mt-2">
+                    <button
+                      onClick={handleSignout}
+                      className="bg-gray-200 block text-center"
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
               </div>
-            ) : (
+            )}
+            {!user && (
               <Link to="/login" className="btn bg-warning text-black">
                 Login
               </Link>

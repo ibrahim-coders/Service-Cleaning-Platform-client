@@ -5,11 +5,11 @@ import { Helmet } from 'react-helmet-async';
 
 const MainLayout = () => {
   return (
-    <div className="font-poppins">
+    <div className="font-poppins max-w-screen-xl mx-auto px-4">
       <Helmet>
         <title>Service | Home</title>
       </Helmet>
-      ;
+
       <Navbar />
       <Outlet />
       <Footer />
