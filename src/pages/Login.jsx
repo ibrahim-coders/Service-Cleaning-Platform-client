@@ -66,31 +66,25 @@ const Login = () => {
 
       {/* Login Form */}
       <div className="w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4 text-center text-gray-800">
-          Login
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-center ">Login</h2>
         <form
           onSubmit={handleLogin}
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md"
+          className="shadow-md rounded px-8 pt-6 pb-8 w-full max-w-md"
         >
           {/* Email Field */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2">
-              Email:
-            </label>
+            <label className="block  text-sm font-bold mb-2">Email:</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full p-3  leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           {/* Password Field */}
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Password:
-          </label>
+          <label className="block  text-sm font-bold mb-2">Password:</label>
           <div className="relative mb-4">
             <input
               type={showPasswords ? 'text' : 'password'}
@@ -98,7 +92,7 @@ const Login = () => {
               value={password}
               onChange={e => setPassword(e.target.value)}
               placeholder="Password"
-              className="shadow appearance-none border rounded w-full p-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full p-3 0 leading-tight focus:outline-none focus:shadow-outline"
             />
             <span
               onClick={passwordVisibility}
@@ -122,7 +116,7 @@ const Login = () => {
           </div>
         </form>
         <div className="mt-4">
-          <p className="text-center text-sm text-gray-500 py-2">
+          <p className="text-center text-sm  py-2">
             Create new account ?
             <Link className="underline pl-2 text-sky-500" to="/register">
               Sign Up
@@ -132,7 +126,7 @@ const Login = () => {
         {/* Divider */}
         <div className="flex items-center my-6">
           <div className="border-t w-full border-gray-300"></div>
-          <p className="px-4 text-gray-500 text-sm w-full">Or continue with</p>
+          <p className="px-4 text-sm w-full">Or continue with</p>
           <div className="border-t w-full border-gray-300"></div>
         </div>
         {/* Google Sign-In Button */}

@@ -15,7 +15,7 @@ export const AuthProvider = createContext();
 const AuthContext = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [theme, setTheme] = useState('light');
+
   // Create user
   const createNewUser = (email, password) => {
     setLoading(true);
@@ -69,9 +69,6 @@ const AuthContext = ({ children }) => {
     };
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(curr => (curr === 'light' ? 'dark' : 'light'));
-  };
   const authInfo = {
     createNewUser,
     user,
@@ -79,12 +76,9 @@ const AuthContext = ({ children }) => {
     UserLogin,
     singwithGoogle,
     signOutUser,
-    theme,
-    setTheme,
-    toggleTheme,
   };
   return (
-    <div className={`App main ${theme}`} id={theme}>
+    <div>
       <AuthProvider.Provider value={authInfo}>{children}</AuthProvider.Provider>
     </div>
   );

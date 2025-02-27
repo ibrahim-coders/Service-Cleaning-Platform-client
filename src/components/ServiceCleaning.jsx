@@ -19,10 +19,10 @@ const ServiceCleaning = () => {
   };
 
   return (
-    <section className="py-4 bg-gray-50 px-8">
+    <section className="py-4  px-8">
       <div className="container mx-auto text-center">
         <motion.h2
-          className="text-4xl font-bold text-gray-800 mb-6"
+          className="text-4xl font-bold  mb-6"
           initial="hidden"
           animate="visible"
           transition={{ duration: 0.8 }}
@@ -31,7 +31,7 @@ const ServiceCleaning = () => {
           Our Premium Cleaning Services
         </motion.h2>
         <motion.p
-          className="text-lg mt-4 text-gray-600 max-w-lg mx-auto"
+          className="text-lg mt-4  max-w-lg mx-auto"
           initial="hidden"
           animate="visible"
           transition={{ duration: 1, delay: 0.2 }}

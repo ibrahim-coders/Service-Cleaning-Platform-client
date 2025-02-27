@@ -7,8 +7,8 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 import Slide from '../components/Slide';
 import bgimg1 from '../assets/1685518151043.png';
-import bgimg2 from '../assets/What_to_Look_For_in_a_Potential_Cleaning_Employee_1_0191b0e980.png';
-import bgimg3 from '../assets/depositphotos_43207253-stock-photo-large-diverse-group-of-janitors.jpg';
+import bgimg2 from '../assets//s.avif';
+import bgimg3 from '../assets/ss.avif';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 const Banner = () => {
@@ -31,57 +31,49 @@ const Banner = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
       >
-        <SwiperSlide>
-          <Slide
-            image={bgimg1}
-            text={
-              <div className="max-w-screen-sm">
-                <h3 className="text-2xl md:text-5xl font-semibold text-white">
-                  Cleaning with Care Every Time
-                </h3>
-                <p className="mt-2 font-normal text-white text-base">
-                  Hire Us! We are a Professional cleaning company offering
-                  service
-                </p>
-                <button className="btn btn-warning mt-2">OUR SERVICE</button>
-              </div>
-            }
-          />
+        <SwiperSlide className="relative">
+          <Slide image={bgimg1} />
+
+          <div className="space-y-4 max-w-screen-sm  absolute top-24 left-14 md:left-28 transform ">
+            <h3 className="text-2xl md:text-5xl font-bold text-white space-y-4">
+              Sparkling{' '}
+              <span className="text-green-600 text-3xl md:text-6xl">Clean</span>
+              <br />
+              <span className="pt-2"> Every Time</span>
+            </h3>
+            <p className="mt-2 font-normal text-white text-sm md:text-xl">
+              We can't wait to help you refresh your space. We'll respond to
+              your request within 24 hours to set up your free on-site estimate.
+            </p>
+            <button className="btn btn-warning mt-2">OUR SERVICE</button>
+          </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            image={bgimg2}
-            text={
-              <div className="max-w-screen-sm">
-                <h3 className="text-2xl md:text-5xl font-semibold text-[#050315]">
-                  Cleaning with a personal touch
-                </h3>
-                <p className="mt-2 font-normal text-white text-base">
-                  Hire Us! We are a Professional cleaning company offering
-                  service
-                </p>
-                <button className="btn btn-warning mt-2">OUR SERVICE</button>
-              </div>
-            }
-          />
+        <SwiperSlide className="relative">
+          <Slide image={bgimg2} />
+
+          <div className="space-y-4 max-w-screen-sm  absolute top-32 left-14 md:left-28 transform ">
+            <h3 className="text-2xl md:text-5xl font-semibold text-white">
+              Cleaning with a personal touch
+            </h3>
+            <p className="mt-2 font-normal text-white text-sm md:text-xl">
+              Hire Us! We are a Professional cleaning company offering service
+            </p>
+            <button className="btn btn-warning mt-2">OUR SERVICE</button>
+          </div>
         </SwiperSlide>
-        <SwiperSlide>
-          <Slide
-            image={bgimg3}
-            text={
-              <div className="max-w-screen-sm">
-                <h3 className="text-2xl md:text-5xl font-semibold text-white">
-                  We Are Here With Expert Cleaner
-                </h3>
-                <p className="mt-2 font-normal text-white text-base">
-                  Over 35 Years Leading In Cleaning Industry
-                </p>
-                <button className="btn btn-warning mt-2">OUR SERVICE</button>
-              </div>
-            }
-          />
+        <SwiperSlide className="relative">
+          <Slide image={bgimg3} />
+
+          <div className="space-y-4 max-w-screen-sm  absolute top-32 left-14 md:left-28 transform">
+            <h3 className="text-2xl md:text-5xl font-semibold text-white">
+              We Are Here With Expert Cleaner
+            </h3>
+            <p className="mt-2 font-normal text-white text-sm md:text-xl">
+              Hire Us! We are a Professional cleaning company offering service
+            </p>
+            <button className="btn btn-warning mt-2">OUR SERVICE</button>
+          </div>
         </SwiperSlide>
       </Swiper>
 
@@ -92,10 +84,10 @@ const Banner = () => {
         data-aos-easing="ease-out-cubic"
         data-aos-duration="1000"
       >
-        <h2 className="text-3xl font-bold text-gray-800">
+        <h2 className="text-3xl font-bold ">
           Professional House Cleaning Services
         </h2>
-        <p className="mt-4 text-lg text-gray-600 max-w-lg mx-auto">
+        <p className="mt-4 text-lg  max-w-lg mx-auto">
           We provide top-notch cleaning services to ensure your home is spotless
           and welcoming. Our experienced team uses eco-friendly products to give
           you the best results without compromising on quality.

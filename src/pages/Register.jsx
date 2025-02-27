@@ -113,22 +113,19 @@ const Register = () => {
         ></dotlottie-player>
 
         {/* Registration Form */}
-        <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md mt-10">
+        <div className=" shadow-lg rounded-lg p-6 w-full max-w-md mt-10">
           {/* Registration Form */}
           <form onSubmit={handelRegister} className="space-y-4">
             {/* Name Input */}
             <div>
-              <label
-                htmlFor="name"
-                className="block text-gray-700 text-sm font-medium mb-1"
-              >
+              <label htmlFor="name" className="block text-sm font-medium mb-1">
                 Name
               </label>
               <input
                 type="text"
                 name="name"
                 placeholder="Enter your name"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+                className="w-full border rounded-lg px-4 py-3  focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
               />
             </div>
 
@@ -136,7 +133,7 @@ const Register = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-gray-700 text-sm font-medium mb-1"
+                className="block  text-sm font-medium mb-1"
               >
                 Email
               </label>
@@ -144,7 +141,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 placeholder="Enter your email"
-                className="w-full border rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+                className="w-full border rounded-lg px-4 py-3  focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
               />
             </div>
             <div className="mb-4">
@@ -162,7 +159,7 @@ const Register = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-gray-700 text-sm font-medium mb-1"
+                className="block  text-sm font-medium mb-1"
               >
                 Password
               </label>
@@ -192,7 +189,7 @@ const Register = () => {
             </button>
           </form>
           {/* Divider */}
-          <p className="text-center text-sm text-gray-500 mt-4">
+          <p className="text-center text-sm  mt-4">
             I already have an account ?
             <Link className="underline pl-2 text-sky-600" to="/login">
               Login
@@ -200,9 +197,7 @@ const Register = () => {
           </p>
           <div className="flex items-center my-6">
             <div className="border-t w-full border-gray-300"></div>
-            <p className="px-4 text-gray-500 text-sm w-full">
-              Or continue with
-            </p>
+            <p className="px-4  text-sm w-full">Or continue with</p>
             <div className="border-t w-full border-gray-300"></div>
           </div>
           {/* Google Sign-In Button */}
