@@ -10,7 +10,7 @@ const ServicesCard = ({ service }) => {
         </figure>
         <div className="px-3 py-2 h-54">
           <h2 className="card-title">{title.slice(0, 20)}...</h2>
-          <p className="text-gray-600">{description.slice(0, 70)}...</p>
+          <p className="">{description.slice(0, 70)}...</p>
           <p>Price: ${price}</p>
           <div className="items-start mt-2">
             <Link to={`/details/${_id}`} className="btn btn-primary">

@@ -157,37 +157,37 @@ const MyService = () => {
         </div>
       ) : (
         <div className="overflow-x-auto px-4 md:px-10 my-10">
-          <table className="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+          <table className="min-w-full divide-y-2  text-sm">
             <thead className="ltr:text-left rtl:text-right">
               <tr>
-                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-start">
+                <th className="whitespace-nowrap px-4 py-2 font-medium text-start">
                   Title
                 </th>
-                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-start">
+                <th className="whitespace-nowrap px-4 py-2 font-medium  text-start">
                   Category
                 </th>
-                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-start">
+                <th className="whitespace-nowrap px-4 py-2 font-medium  text-start">
                   Price
                 </th>
-                <th className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-start">
+                <th className="whitespace-nowrap px-4 py-2 font-medium  text-start">
                   Action
                 </th>
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-gray-200 mb-4">
+            <tbody className="divide-y  mb-4">
               {myService.map(service => (
                 <tr key={service._id} className="hover:bg-gray-100">
-                  <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900 text-start">
+                  <td className="whitespace-nowrap px-4 py-2 font-medium text-start">
                     {service.title}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-start">
+                  <td className="whitespace-nowrap px-4 py-2  text-start">
                     {service.category}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-start">
+                  <td className="whitespace-nowrap px-4 py-2  text-start">
                     ${service.price}
                   </td>
-                  <td className="whitespace-nowrap px-4 py-2 text-gray-700 text-start">
+                  <td className="whitespace-nowrap px-4 py-2  text-start">
                     <button
                       onClick={() => handleEditService(service)}
                       className="text-blue-600 mr-2"

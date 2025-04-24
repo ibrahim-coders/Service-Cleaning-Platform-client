@@ -75,33 +75,33 @@ const ServiceDetails = () => {
       </Helmet>
       <img src={image} alt={title} className="mx-auto rounded-lg mb-5" />
       <h2 className=" text-2xl font-bold mb-5">{title}</h2>
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Category:</strong> {category}
       </p>
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Company:</strong> {company}
       </p>
 
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Website:</strong>{' '}
         <a href={website} className="text-blue-500">
           {website}
         </a>
       </p>
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Price:</strong> ${price}
       </p>
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Posted On:</strong> {currentDate}
       </p>
-      <p className="text-gray-600 mb-3">
+      <p className=" mb-3">
         <strong>Description:</strong> {description}
       </p>
 
       <form onSubmit={handleReviewSubmit}>
         <div className="mb-10">
           <div className="">
-            <label className="block font-medium text-gray-700">Rating</label>
+            <label className="block font-medium ">Rating</label>
 
             <Rating
               unratedColor="amber"
@@ -112,9 +112,7 @@ const ServiceDetails = () => {
             />
           </div>
           <div>
-            <label className="block font-medium text-gray-700">
-              Add a Review
-            </label>
+            <label className="block font-medium ">Add a Review</label>
             <textarea
               ref={reviewRef}
               placeholder="Enter service review"
